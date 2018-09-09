@@ -1,4 +1,4 @@
-import { Button, Card, Checkbox, Form, Icon, Input } from 'antd';
+import { Button, Card, Checkbox, Form, Icon, Input, Select } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import FormItem from 'antd/lib/form/FormItem';
 import * as React from 'react';
@@ -20,11 +20,12 @@ export class Login extends React.Component {
         return (
             <Card
                 bodyStyle={{ width: "300px", height: "400px" }}>
-                <LoginFormOne /><hr />
-                <LoginFormTwo /><hr />
-                <LoginFormThree /><hr />
-                <LoginFormFour /><hr />
-                <LoginFormFive /><hr />
+                <LoginFormOne /><div style={{ height: "30px" }} /><hr />
+                <LoginFormTwo /><div style={{ height: "30px" }} /><hr />
+                <LoginFormThree /><div style={{ height: "30px" }} /><hr />
+                <LoginFormFour /><div style={{ height: "30px" }} /><hr />
+                <LoginFormFive /><div style={{ height: "30px" }} /><hr />
+                <FormSix /><div style={{ height: "30px" }} /><hr />
             </Card>
         );
     }
@@ -336,7 +337,7 @@ const LoginFormFour = Form.create()(
 
 interface ITheFormProps extends FormComponentProps {
     onChange: (changedFields: any) => void;
-    onClick: ()=>void;
+    onClick: () => void;
     itemData: any;
 }
 interface IState {
@@ -363,13 +364,13 @@ const TheForm = Form.create({
         public constructor(props: ITheFormProps) {
             super(props);
         }
-        public userName(){
-            const {getFieldDecorator} = this.props.form;
-            return(
+        public userName() {
+            const { getFieldDecorator } = this.props.form;
+            return (
                 <FormItem>
                     {
-                        getFieldDecorator("userName",{
-                            rules:[{required:true,message:"userName please !"}],
+                        getFieldDecorator("userName", {
+                            rules: [{ required: true, message: "userName please !" }],
                         })(
                             <Input />,
                         )
@@ -377,13 +378,13 @@ const TheForm = Form.create({
                 </FormItem>
             );
         }
-        public password(){
-            const {getFieldDecorator} = this.props.form;
-            return(
+        public password() {
+            const { getFieldDecorator } = this.props.form;
+            return (
                 <FormItem>
                     {
-                        getFieldDecorator("password",{
-                            rules:[{required:true,message:"password please !"}],
+                        getFieldDecorator("password", {
+                            rules: [{ required: true, message: "password please !" }],
                         })(
                             <Input />,
                         )
@@ -395,16 +396,16 @@ const TheForm = Form.create({
             return (
                 <Form>
                     {
-                        this.props.itemData.items.map((item: any)=>{
+                        this.props.itemData.items.map((item: any) => {
                             let element: JSX.Element = this[item.field]();
                             return element;
                         })
                     }
                     <FormItem>
                         <Button
-                        type="primary"
-                        htmlType="submit"
-                        onClick={this.props.onClick}>
+                            type="primary"
+                            htmlType="submit"
+                            onClick={this.props.onClick}>
                             Save
                         </Button>
                     </FormItem>
@@ -446,12 +447,12 @@ class LoginFormFive extends React.Component<any, IState>{
             },
         }));
     }
-    public onSave(e: any){
+    public onSave(e: any) {
         e.preventDefault();
         let data = {};
         let fields = this.state.fields;
-        for(const key in fields){
-            if(fields.hasOwnProperty(key)){
+        for (const key in fields) {
+            if (fields.hasOwnProperty(key)) {
                 data[key] = fields[key].value;
             }
         }
@@ -468,8 +469,51 @@ class LoginFormFive extends React.Component<any, IState>{
                     onChange={this.handleFormChange}
                     onClick={this.onSave}
                 />
-                {JSON.stringify(fields,null,2)}
+                {JSON.stringify(fields, null, 2)}
             </div>
         );
     }
 }
+
+const FormSix = Form.create()(
+    class extends React.Component<FormComponentProps, any> {
+        public constructor(props: any) {
+            super(props);
+            this.submit = this.submit.bind(this);
+        }
+        public submit(e: any) {
+            e.preventDefault();
+            this.props.form.validateFields((err, values) => {
+                console.log(values);
+            });
+        }
+
+        public render() {
+            const selectOptions = [];
+            for (let i = 0; i < 4; i++) {
+                selectOptions.push(<Select.Option key={`${i}`} value={`${i}`}>{i}</Select.Option>);
+            }
+            const { getFieldDecorator } = this.props.form;
+            return (
+                <Form>
+                    <Form.Item>
+                        {
+                            getFieldDecorator(`selects`, {
+                                rules: [{ required: true, message: "choose something" }],
+                            })(
+                                <Select
+                                    mode="multiple"
+                                    placeholder="select your choice">
+                                    {selectOptions}
+                                </Select>,
+                            )
+                        }
+                    </Form.Item>
+                    <Form.Item>
+                        <Button htmlType="submit" onClick={this.submit}>确定</Button>
+                    </Form.Item>
+                </Form>
+            );
+        }
+    },
+);
