@@ -1,4 +1,4 @@
-import { Button, Card, Checkbox, Form, Icon, Input, Select } from 'antd';
+import { Button, Checkbox, Form, Icon, Input, Select } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import FormItem from 'antd/lib/form/FormItem';
 import * as React from 'react';
@@ -18,15 +18,14 @@ export class Login extends React.Component {
     }
     public render() {
         return (
-            <Card
-                bodyStyle={{ width: "300px", height: "400px" }}>
+            <div>
                 <LoginFormOne /><div style={{ height: "30px" }} /><hr />
                 <LoginFormTwo /><div style={{ height: "30px" }} /><hr />
                 <LoginFormThree /><div style={{ height: "30px" }} /><hr />
                 <LoginFormFour /><div style={{ height: "30px" }} /><hr />
                 <LoginFormFive /><div style={{ height: "30px" }} /><hr />
                 <FormSix /><div style={{ height: "30px" }} /><hr />
-            </Card>
+            </div>
         );
     }
 }
