@@ -25,6 +25,7 @@ export class Login extends React.Component {
                 <LoginFormFour /><div style={{ height: "30px" }} /><hr />
                 <LoginFormFive /><div style={{ height: "30px" }} /><hr />
                 <FormSix /><div style={{ height: "30px" }} /><hr />
+                <InputTest /><div style={{ height: "30px" }} /><hr />
             </div>
         );
     }
@@ -366,7 +367,7 @@ const TheForm = Form.create({
         public userName() {
             const { getFieldDecorator } = this.props.form;
             return (
-                <FormItem>
+                <FormItem label="userName">
                     {
                         getFieldDecorator("userName", {
                             rules: [{ required: true, message: "userName please !" }],
@@ -380,7 +381,7 @@ const TheForm = Form.create({
         public password() {
             const { getFieldDecorator } = this.props.form;
             return (
-                <FormItem>
+                <FormItem label="password">
                     {
                         getFieldDecorator("password", {
                             rules: [{ required: true, message: "password please !" }],
@@ -393,7 +394,7 @@ const TheForm = Form.create({
         }
         public render() {
             return (
-                <Form>
+                <Form layout="horizontal">
                     {
                         this.props.itemData.items.map((item: any) => {
                             let element: JSX.Element = this[item.field]();
@@ -516,3 +517,86 @@ const FormSix = Form.create()(
         }
     },
 );
+
+
+interface IInputTestState {
+    email: string;
+    captcha: string;
+}
+const InputTest = Form.create()(
+    class extends React.Component<FormComponentProps, IInputTestState>{
+        public constructor(props: FormComponentProps) {
+            super(props);
+            this.state = {
+                email: "",
+                captcha: "",
+            };
+            this.onChange = this.onChange.bind(this);
+            this.onCaptchaChange = this.onCaptchaChange.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
+            this.sendCaptcha = this.sendCaptcha.bind(this);
+        }
+        public onChange(e: any) {
+            let value = e.target.value;
+            this.setState({
+                email: value,
+            });
+        }
+        public onCaptchaChange(e: any) {
+            let value = e.target.value;
+            this.setState({
+                captcha: value,
+            });
+        }
+        public handleSubmit(e: React.MouseEvent) {
+            e.preventDefault();
+            console.log(JSON.stringify(this.state));
+        }
+        public async sendCaptcha(){
+            return;
+        }
+
+        public render() {
+            const { getFieldDecorator } = this.props.form;
+            const formItemLayout = {
+                labelCol:{
+                    span: 8,
+                },
+                wrapperCol:{
+                    span: 16,
+                },
+            };
+            return (
+                <Form style={{maxWidth:"300px"}}>
+                    <Form.Item label="hahha" {...formItemLayout} style={{width:"70%"}}>
+                        {
+                            getFieldDecorator("email", {
+                                rules: [{ required: true, message: "email please!" }],
+                            })(
+                                <Input onChange={this.onChange} style={{width:"70%"}}/>,
+                            )
+                        }
+                        <a href="javascript:;"
+                        style={{marginLeft:"10px"}}
+                        onClick={this.sendCaptcha}>
+                        验证
+                        </a>
+                    </Form.Item>
+                    <Form.Item label="ajjaja" {...formItemLayout}>
+                        {
+                            getFieldDecorator("captcha", {
+                                rules: [{ required: true, message: "captcha please!" }],
+                            })(
+                                <Input onChange={this.onCaptchaChange} />,
+                            )
+                        }
+                    </Form.Item>
+                    <Form.Item>
+                        <Button htmlType="submit" onClick={this.handleSubmit}>确定</Button>
+                    </Form.Item>
+                </Form>
+            );
+        }
+    },
+);
+

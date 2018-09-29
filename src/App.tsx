@@ -12,6 +12,7 @@ import {
 import { MyList } from './study/list';
 import { Login } from './study/login';
 import { AuthRoute, RouterOne } from './study/router';
+import MyUpload from './study/upload';
 
 
 class App extends React.Component {
@@ -50,6 +51,12 @@ class App extends React.Component {
                     </span>
                   </Menu.Item>
                 </SubMenu>
+                <Menu.Item key="4">
+                  <Icon type="team" />
+                  <span className="nav-text">
+                    <Link to="/upload">Upload</Link>
+                  </span>
+                </Menu.Item>
               </Menu>
             </Sider>
             <Layout style={{ marginLeft: 200 }}>
@@ -60,6 +67,7 @@ class App extends React.Component {
                   <Route path="/list" component={MyList} />
                   <Route path="/router/1" component={RouterOne} />
                   <Route path="/router/2" component={AuthRoute} />
+                  <Route path="/upload" component={MyUpload} />
                 </div>
               </Content>
               <Footer style={{ textAlign: 'center' }}>
