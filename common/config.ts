@@ -1,5 +1,5 @@
-import * as mongo from "mongodb";
-
-let MongoClient = mongo.MongoClient;
-
-let url;
+module.exports = {
+    mongo:{
+        url:"mongo://localhost:27017/mytest",
+    },
+};
