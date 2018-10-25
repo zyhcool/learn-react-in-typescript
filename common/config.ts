@@ -1,5 +1,5 @@
-module.exports = {
+export default {
     mongo:{
-        url:"mongo://localhost:27017/mytest",
+        url:"mongodb://localhost:27017/mytest",
     },
 };
