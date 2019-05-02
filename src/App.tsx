@@ -3,12 +3,12 @@ import * as React from 'react';
 import './App.css';
 
 const { Header, Content, Footer, Sider } = Layout;
-import SubMenu from 'antd/lib/menu/SubMenu';
 import {
   BrowserRouter as Router,
   Link,
   Route,
 } from 'react-router-dom';
+import { DynamicFieldSetPage } from './study/dynamicFieldSet';
 import { MyList } from './study/list';
 import { Login } from './study/login';
 import { AuthRoute, RouterOne } from './study/router';
@@ -39,22 +39,28 @@ class App extends React.Component {
                     <Link to="/list">MyList</Link>
                   </span>
                 </Menu.Item>
-                <SubMenu key="3" title={<span><Icon type="shop" /><span>React-Router-Dom</span></span>}>
+                <Menu.SubMenu key="3" title={<span><Icon type="shop" /><span>React-Router-Dom</span></span>}>
                   <Menu.Item key="3.1">
                     <span className="nav-text">
-                    <Link to="/router/1">Router 1</Link>
+                      <Link to="/router/1">Router 1</Link>
                     </span>
                   </Menu.Item>
                   <Menu.Item key="3.2">
                     <span className="nav-text">
-                    <Link to="/router/2">Auth Route</Link>
+                      <Link to="/router/2">Auth Route</Link>
                     </span>
                   </Menu.Item>
-                </SubMenu>
+                </Menu.SubMenu>
                 <Menu.Item key="4">
                   <Icon type="team" />
                   <span className="nav-text">
                     <Link to="/upload">Upload</Link>
+                  </span>
+                </Menu.Item>
+                <Menu.Item key="5">
+                  <Icon type="team" />
+                  <span className="nav-text">
+                    <Link to="/dynamicField">DynamicFieldSet</Link>
                   </span>
                 </Menu.Item>
               </Menu>
@@ -68,11 +74,12 @@ class App extends React.Component {
                   <Route path="/router/1" component={RouterOne} />
                   <Route path="/router/2" component={AuthRoute} />
                   <Route path="/upload" component={MyUpload} />
+                  <Route path="/dynamicField" component={DynamicFieldSetPage} />
                 </div>
               </Content>
               <Footer style={{ textAlign: 'center' }}>
-                Learning Something ©2018 Created with <span><Icon type="heart" style={{ color: "red" }} theme="filled" /></span> by Cool
-        </Footer>
+                {`Learning Something ©2018 Created with`} <span><Icon type="heart" style={{ color: "red" }} theme="filled" /></span> {`by Cool`}
+              </Footer>
             </Layout>
           </Layout>
         </div>

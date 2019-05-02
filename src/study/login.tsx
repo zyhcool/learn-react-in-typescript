@@ -1,6 +1,5 @@
 import { Button, Checkbox, Form, Icon, Input, Select } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import FormItem from 'antd/lib/form/FormItem';
 import * as React from 'react';
 
 // interface ILoginFormProps extends FormComponentProps{
@@ -230,7 +229,7 @@ const LoginFormThree = Form.create()(
             console.log(keys);
             const nameItems = keys.map((k: any) => {
                 return (
-                    <FormItem
+                    <Form.Item
                         key={k}>
                         {
                             getFieldDecorator(`name[${k}]`, {
@@ -243,18 +242,18 @@ const LoginFormThree = Form.create()(
                             className="dynamic-delete-button"
                             type="minus-circle-o"
                             onClick={() => this.remove(k)} />
-                    </FormItem>
+                    </Form.Item>
                 );
             });
             return (
                 <Form>
                     {nameItems}
-                    <FormItem>
+                    <Form.Item>
                         <Button type="dashed" onClick={this.add}>添加</Button>
-                    </FormItem>
-                    <FormItem>
+                    </Form.Item>
+                    <Form.Item>
                         <Button type="primary" htmlType="submit">保存</Button>
-                    </FormItem>
+                    </Form.Item>
                 </Form>
             );
         }
@@ -303,7 +302,7 @@ const LoginFormFour = Form.create()(
             const { getFieldDecorator } = this.props.form;
             let nameItems = this.state.keys.map((k: any) => {
                 return (
-                    <FormItem
+                    <Form.Item
                         key={k}
                     >
                         {
@@ -317,18 +316,18 @@ const LoginFormFour = Form.create()(
                             className="dynamic-delete-button"
                             type="minus-circle-o"
                             onClick={() => { let keys = remove(k, this.state.keys); this.setState({ keys }); }} />
-                    </FormItem>
+                    </Form.Item>
                 );
             });
             return (
                 <Form>
                     {nameItems}
-                    <FormItem>
+                    <Form.Item>
                         <Button type="dashed" onClick={() => { let keys = add(1, this.state.keys); this.setState({ keys }); }}>添加</Button>
-                    </FormItem>
-                    <FormItem>
+                    </Form.Item>
+                    <Form.Item>
                         <Button type="primary" htmlType="submit">保存</Button>
-                    </FormItem>
+                    </Form.Item>
                 </Form>
             );
         }
@@ -367,7 +366,7 @@ const TheForm = Form.create({
         public userName() {
             const { getFieldDecorator } = this.props.form;
             return (
-                <FormItem label="userName">
+                <Form.Item label="userName">
                     {
                         getFieldDecorator("userName", {
                             rules: [{ required: true, message: "userName please !" }],
@@ -375,13 +374,13 @@ const TheForm = Form.create({
                             <Input />,
                         )
                     }
-                </FormItem>
+                </Form.Item>
             );
         }
         public password() {
             const { getFieldDecorator } = this.props.form;
             return (
-                <FormItem label="password">
+                <Form.Item label="password">
                     {
                         getFieldDecorator("password", {
                             rules: [{ required: true, message: "password please !" }],
@@ -389,7 +388,7 @@ const TheForm = Form.create({
                             <Input />,
                         )
                     }
-                </FormItem>
+                </Form.Item>
             );
         }
         public render() {
@@ -401,14 +400,14 @@ const TheForm = Form.create({
                             return element;
                         })
                     }
-                    <FormItem>
+                    <Form.Item>
                         <Button
                             type="primary"
                             htmlType="submit"
                             onClick={this.props.onClick}>
                             Save
                         </Button>
-                    </FormItem>
+                    </Form.Item>
                 </Form>
             );
         }
@@ -558,7 +557,7 @@ const InputTest = Form.create()(
 
         public render() {
             const { getFieldDecorator } = this.props.form;
-            const formItemLayout = {
+            const FormItemLayout = {
                 labelCol:{
                     span: 8,
                 },
@@ -568,7 +567,7 @@ const InputTest = Form.create()(
             };
             return (
                 <Form style={{maxWidth:"300px"}}>
-                    <Form.Item label="hahha" {...formItemLayout} style={{width:"70%"}}>
+                    <Form.Item label="hahha" {...FormItemLayout} style={{width:"70%"}}>
                         {
                             getFieldDecorator("email", {
                                 rules: [{ required: true, message: "email please!" }],
@@ -582,7 +581,7 @@ const InputTest = Form.create()(
                         验证
                         </a>
                     </Form.Item>
-                    <Form.Item label="ajjaja" {...formItemLayout}>
+                    <Form.Item label="ajjaja" {...FormItemLayout}>
                         {
                             getFieldDecorator("captcha", {
                                 rules: [{ required: true, message: "captcha please!" }],
