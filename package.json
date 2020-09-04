@@ -11,7 +11,7 @@
     "koa-compose": "^4.1.0",
     "koa-route": "^3.2.0",
     "koa-static": "^5.0.0",
-    "mongodb": "^3.1.8",
+    "mongodb": "^3.1.13",
     "path": "^0.12.7",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
